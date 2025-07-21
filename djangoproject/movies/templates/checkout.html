@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<div class="checkout-container">
+  <div class="summary-card">
+    
+    <h2 class="summary-title">Order Summary</h2>
+    
+    <div class="summary-details">
+      <div class="detail-row">
+        <span>Movie</span>
+        <strong>{{ booking.showtime.movie.movie_name }}</strong>
+      </div>
+      <div class="detail-row">
+        <span>Theater</span>
+        <strong>{{ booking.showtime.screen.theater.theater_name }} ({{ booking.showtime.screen.screen_name }})</strong>
+      </div>
+      <div class="detail-row">
+        <span>Showtime</span>
+        <strong>{{ booking.showtime.start_time|date:"l, F j - g:i A" }}</strong>
+      </div>
+      <div class="detail-row">
+        <span>Seats</span>
+        <strong>
+          {% for seat in booking.seats.all %}
+            {{ seat.seat_number }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </strong>
+      </div>
+    </div>
+    
+    <div class="total-price-section">
+      <span>Total Amount</span>
+      <strong class="total-price">₹{{ booking.total_price }}</strong>
+    </div>
+
+    <button id="pay-btn" class="btn btn-primary">Proceed to Pay</button>
+  
+  </div>
+</div>
+
+
+<script>
+  const payButton = document.getElementById('pay-btn');
+
+  payButton.addEventListener('click', function(event) {
+    const options = {
+        "key": "{{ razorpay_key_id }}", 
+        "amount": "{{ order_amount }}",
+        "currency": "INR",
+        "name": "CurtainUp Cinemas",
+        "description": "Movie Ticket Booking for {{ booking.showtime.movie.movie_name }}",
+        "order_id": "{{ razorpay_order_id }}",
+        "handler": function (response){
+            // This is where we will send the success response to our backend to verify
+            alert("Payment successful! We will verify it now.");
+            // We will build the verification step next.
+        },
+        "prefill": {
+            "name": "{{ request.user.get_full_name|default:request.user.username }}",
+            "email": "{{ request.user.email }}",
+        },
+        "theme": { "color": "#3E8BFF" }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+  });
+</script>
+
+{% endblock %}

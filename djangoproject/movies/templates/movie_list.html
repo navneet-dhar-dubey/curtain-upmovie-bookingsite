@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {# This tells Django to use base.html as the parent template #}
+{% load static %}
+
+{% block title %}All Movies - CurtainUp{% endblock %} {# Override the title block #}
+
+{% block content %} {# Fill the content block from base.html #}
+    <section class="hero-section">
+    <div class="hero-overlay"></div>
+     <div class="hero-content">
+    <h1>All Your Entertainment Needs, Under One Roof</h1>
+    <p>Book tickets for movies, events, and more</p>
+        </div>
+      </section>
+      <h1>Now Showing</h1>
+      <hr>
+
+    <form action="{%url 'movie_list' %}" method="get" class="filter-form">
+    <select name="city">
+    <option value="">All Cities</option>
+    {% for city in cities %}
+    <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}
+    
+    </option>
+
+    
+    {% endfor %}
+    </select>
+    <input type="text" name="q" placeholder="Seach by movie name.." value ="{{search_query|default:''}}">
+    
+    <button type="submit">Filter</button>
+    
+    
+    </form>
+    <hr>
+
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' movie.id %}">
+              <img src="{{ movie.poster_image.url }}" alt="{{ movie.movie_name }}">
+              
+              <div class="card-overlay">
+                <h3 class="movie-title">{{ movie.movie_name }}</h3>
+                <div class="movie-details">
+                  <span class="movie-rating">
+                    <i class="fa-solid fa-star"></i> {{ movie.rating }}
+                  </span>
+                  <span class="movie-language">
+                    <i class="fa-solid fa-globe"></i> {{ movie.language }}
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% empty %}
+        <p>No movies match your criteria. Please Search Again</p>
+        {% endfor %}
+    </div>
+    <style>
+    .filter-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  </style>
+{% endblock content %} 

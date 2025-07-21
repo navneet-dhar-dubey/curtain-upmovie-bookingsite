@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CurtainUp{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header class="navbar-container">
+        <div class="navbar-top">
+            <div class="left-section">
+                <a href="{% url 'movie_list' %}" class="logo-image-link">
+                    <img src="{% static 'images/curtainup-logo.png' %}" alt="CurtainUp Logo" class="curtainup-logo">
+                </a>
+                
+                <div class="top-search-bar">
+  
+            </div>
+            <div class="right-section">
+                
+                
+                {% if user.is_authenticated %}
+                    <span class="welcome-text">Hello, {{ user.username }}!</span>
+                    <a href="{% url 'my_bookings' %}" class="plain-link">My Bookings</a>
+                    <a href="{% url 'logout' %}" class="call-to-action-btn">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="call-to-action-btn">Sign In</a>
+                {% endif %}
+                
+                <i class="fas fa-bars menu-icon"></i>
+            </div>
+        </div>
+        
+        <nav class="navbar-bottom">
+            <ul>
+                <li><a href="{% url 'movie_list' %}">Movies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+            {# Content from child templates will be inserted here #}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CurtainUp. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

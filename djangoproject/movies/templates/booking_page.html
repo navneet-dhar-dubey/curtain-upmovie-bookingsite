@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Book Your Seats</h1>
+<p>Click on the available green seats to select them.</p>
+<hr>
+
+<form method="POST" id="booking-form">
+  {% csrf_token %}
+
+  <div class="seat-map">
+    {% for seat in all_seats %}
+      <div class="seat">
+        <input 
+          type="checkbox" 
+          name="seats" 
+          value="{{ seat.id }}" 
+          id="seat-{{ seat.id }}"
+          {% if seat.id in booked_seat_ids %}disabled{% endif %}>
+        
+        <label for="seat-{{ seat.id }}">{{ seat.seat_number }}</label>
+      </div>
+
+    {% endfor %}
+  </div>
+
+  <button type="submit" class="book-btn">Confirm Booking</button>
+</form>
+
+<style>
+  /* This creates the grid layout */
+  .seat-map {
+    display: grid;
+    /* Adjust the number of columns to match your screen */
+    grid-template-columns: repeat(15, auto); 
+    gap: 7px;
+    margin-bottom: 25px;
+  }
+
+  /* This styles the seat's visible label */
+  .seat label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #d4edda; /* Light Green for available */
+  }
+
+  /* This hides the actual checkbox circle */
+  .seat input[type="checkbox"] {
+    display: none;
+  }
+
+  /* This styles the label when its checkbox is CHECKED */
+  .seat input[type="checkbox"]:checked + label {
+    background-color: #007bff; /* Blue for selected */
+    color: white;
+  }
+
+  /* This styles the label when its checkbox is DISABLED (already booked) */
+  .seat input[type="checkbox"]:disabled + label {
+    background-color: #6c757d; /* Grey for booked */
+    color: #fff;
+    cursor: not-allowed;
+  }
+</style>
+
+<script>
+  const bookingForm = document.getElementById('booking-form');
+
+  // This simple script asks for confirmation before submitting
+  bookingForm.addEventListener('submit', function(event) {
+    const userConfirmed = confirm("Are you sure you want to book these tickets?");
+    
+    if (!userConfirmed) {
+      event.preventDefault(); // Stop the form from submitting if user clicks "Cancel"
+    }
+  });
+</script>
+
+{% endblock %}
