@@ -138,3 +138,6 @@ RAZORPAY_KEY_SECRET = 'DdRUqZl3buftVI2FdyqzygmM'
 
 # This is where Django will collect all static files for deployment
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# e.g., ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']
+ALLOWED_HOSTS = ['navneetdhardubey.pythonanywhere.com']
