@@ -1,43 +1,46 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends 'base.html' %}
 
 {% block content %}
-<h1>{{movie.movie_name}}</h1>
+<div class="movie-detail-container">
+  
+  <div class="movie-banner">
+    <div class="poster-container">
+      <img src="{{ movie.poster_image.url }}" alt="{{ movie.movie_name }}">
+    </div>
+    <div class="info-container">
+      <h1>{{ movie.movie_name }}</h1>
+      <div class="meta-tags">
+        <span class="tag">{{ movie.get_rating_display }}</span>
+        <span class="tag">{{ movie.language }}</span>
+        <span class="tag"><i class="fa-regular fa-clock"></i> {{ movie.duration_minutes }} min</span>
+      </div>
+      <p class="description">{{ movie.movie_description }}</p>
+    </div>
+  </div>
 
-<img src="{{movie.poster_image.url  }}" alt="{{movie.movie_name}} Poster" width="200">
-<p><strong>Description:</strong>{{movie.movie_description}}</p>
-<p><strong>Duration:</strong>{{movie.duration_minutes}} minutes</p>
-
-
-<h2>Showtimes</h2>
-<div class="Showtimes-list">
- {% for show in showtimes %}
- <div class="showtime-item">
-        <p>
-          <strong>Theater:</strong> {{ show.screen.theater.theater_name }}<br>
-          <strong>Time:</strong> {{ show.start_time|date:"l, F j, g:i A" }}
-        </p>
-        <a href="{% url 'booking_view' show.id %}" class="book-btn">Book Now</a>
+  <div class="showtimes-section">
+    <h2>Showtimes</h2>
+    {% for date, shows_on_date in showtimes_by_date.items %}
+      <div class="date-group">
+        <h3>{{ date|date:"l, F j" }}</h3>
+        <div class="showtimes-grid">
+          {% for show in shows_on_date %}
+            <div class="showtime-card">
+              <div class="theater-info">
+                <strong>{{ show.screen.theater.theater_name }}</strong>
+                <p>{{ show.screen.screen_name }}</p>
+              </div>
+              <a href="{% url 'booking_view' show.id %}" class="btn btn-primary showtime-btn">
+                {{ show.start_time|date:"g:i A" }}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     {% empty %}
       <p>There are no upcoming showtimes for this movie.</p>
     {% endfor %}
+  </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endblock %}

@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Length
 import razorpay
+from collections import defaultdict
 
 # Create your views here.
 
@@ -67,12 +68,17 @@ def logout_view(request):
     logout(request)
     return redirect('movie_list')
 
-
+@login_required
 def movie_detail(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     
     showtimes = Showtime.objects.filter(movie=movie, start_time__gte=timezone.now() #gte means greaterthanorequalto
     ).order_by('start_time')
+    
+    showtimes_by_date = defaultdict(list)
+    for show in showtimes:
+        show_date = show.start_time.date()
+        showtimes_by_date[show_date].append(show)
     
     context={
         'movie': movie,

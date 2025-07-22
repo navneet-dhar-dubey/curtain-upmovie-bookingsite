@@ -608,3 +608,171 @@ footer {
   font-size: 18px;
   margin-top: 10px;
 }
+
+/* In static/css/style.css */
+
+/* ==========================================================================
+   Authentication Page Styles (Login/Signup)
+   ========================================================================== */
+
+/* This container centers the card on the page */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* The main card for the form */
+.auth-card {
+  background-color: var(--background-white);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.auth-subtext {
+  margin-bottom: 30px;
+  color: #6c757d;
+}
+
+/* Styles for the form itself */
+.auth-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.auth-form .btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.form-errors {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Styles for the "Sign up here" link */
+.auth-switch {
+  margin-top: 25px;
+  font-size: 14px;
+}
+
+/* In static/css/style.css */
+
+.movie-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Movie Banner Styles --- */
+.movie-banner {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.poster-container img {
+  width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.info-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.meta-tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* --- Showtimes Section Styles --- */
+.showtimes-section h2 {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.date-group {
+  margin-bottom: 30px;
+}
+
+.date-group h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.showtimes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.showtime-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.theater-info p {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.showtime-btn {
+  padding: 8px 20px;
+  font-size: 14px;
+}

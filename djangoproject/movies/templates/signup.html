@@ -1,10 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Sign Up</h1>
-  <form method="POST" action="{% url 'signup' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Create an Account</h2>
+    <p class="auth-subtext">Join us and start booking your favorite movies.</p>
+
+    <form method="POST" class="auth-form">
+      {% csrf_token %}
+      
+      {% if form.non_field_errors %}
+        <div class="form-errors">
+            {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+        {% for error in form.username.errors %}
+          <p style="color: red; font-size: 12px; margin-top: 5px;">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        {{ form.password1 }}
+        {% for error in form.password1.errors %}
+          <p style="color: red; font-size: 12px; margin-top: 5px;">{{ error }}</p>
+        {% endfor %}
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+        {{ form.password2 }}
+        {% for error in form.password2.errors %}
+          <p style="color: red; font-size: 12px; margin-top: 5px;">{{ error }}</p>
+        {% endfor %}
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+    
+    <div class="auth-switch">
+      <p>Already have an account? <a href="{% url 'login' %}">Log in here</a></p>
+    </div>
+  </div>
+</div>
 {% endblock %}

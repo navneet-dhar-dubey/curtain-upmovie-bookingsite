@@ -141,3 +141,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # e.g., ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']
 ALLOWED_HOSTS = ['navneetdhardubey.pythonanywhere.com']
+
+# In djangoproject/settings.py
+
+LOGIN_URL = 'login'
