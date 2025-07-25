@@ -4,7 +4,7 @@
 
 A full-stack web application built with Django that allows users to browse movies, select seats from an interactive map, and book tickets online. This project demonstrates a complete end-to-end booking flow, including user authentication and payment gateway integration.
 
-**Live Demo:** `[Link to your Vercel URL]`
+**Live Demo:** https://navneetdhardubey.pythonanywhere.com/
 
 -----
 
@@ -28,7 +28,7 @@ A full-stack web application built with Django that allows users to browse movie
   * **Frontend:** HTML, CSS, JavaScript
   * **Database:** SQLite3 (for development)
   * **Payment Gateway:** Razorpay API
-  * **Deployment:** Vercel
+  * **Deployment:** PythonAnywhere by Ananconda
 
 -----
 
