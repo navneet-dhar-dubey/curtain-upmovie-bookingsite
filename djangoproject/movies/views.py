@@ -72,6 +72,9 @@ def logout_view(request):
 def movie_detail(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     
+      
+        
+    
     showtimes = Showtime.objects.filter(movie=movie, start_time__gte=timezone.now() #gte means greaterthanorequalto
     ).order_by('start_time')
     
@@ -79,6 +82,9 @@ def movie_detail(request, movie_id):
     for show in showtimes:
         show_date = show.start_time.date()
         showtimes_by_date[show_date].append(show)
+    
+    
+    
     
     context={
         'movie': movie,
